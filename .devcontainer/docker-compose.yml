@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: "ghcr.io/ds-hw-fuuzen/hw3-frontend:master"
+    name: "hw4-frontend"
+    environment:
+      - BK_LOGIN_URL=https://ce.bktencent.com/login/
+      - BK_APP_HOST=dev.ce.bktencent.com
+      - BK_AJAK_URL_PREFIX=/
+      - BK_USER_INFO_URL=/user
+      - BK_BACKEND_API_PREFIX=http://dev.ce.bktencent.com:8000
+    volumes:
+      - ${HOME}/.ssh:/root/.ssh

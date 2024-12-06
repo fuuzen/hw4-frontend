@@ -1,0 +1,21 @@
+{
+    "name": "hw3",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "frontend",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "octref.vetur",
+                "dbaeumer.vscode-eslint",
+                "stylelint.vscode-stylelint"
+            ]
+        }
+    },
+    "workspaceFolder": "/app/dev",
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/app/dev,type=bind"
+    ],
+    "remoteUser": "root",
+    "postCreateCommand": "ln -s /app/node_modules /app/dev/node_modules",
+    "postStartCommand": "npm run dev"
+}

@@ -1,0 +1,22 @@
+FROM node:14.16.1-slim
+
+WORKDIR /app
+
+COPY package.json /app
+
+RUN echo "deb [trusted=yes] http://archive.debian.org/debian stretch main non-free contrib" > /etc/apt/sources.list && \
+    echo 'deb-src [trusted=yes] http://archive.debian.org/debian/ stretch main non-free contrib'  >> /etc/apt/sources.list && \
+    echo 'deb [trusted=yes] http://archive.debian.org/debian-security/ stretch/updates main non-free contrib'  >> /etc/apt/sources.list; \
+    apt-get update && \
+    apt-get install -y fish git && \
+    rm -rf /var/lib/apt/lists/* && \
+    sed -i 's|/bin/bash|/usr/bin/fish|g' /etc/passwd && \
+    npm install -g npm@6 && \
+    npm install && \
+    npm cache clean --force
+
+EXPOSE 5000
+
+COPY start.sh /
+
+ENTRYPOINT ["/bin/bash", "/start.sh"]
